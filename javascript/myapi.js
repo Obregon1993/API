@@ -20,7 +20,7 @@ $(".button").on("click", function () {
     var animalButton=$(this).attr("id");0
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-    animalButton + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+        animalButton + "&api_key=KMQSbfo1B09YmfDrVddE8Ul5OJvMoHzD&limit=10";
 
  
  $.ajax({
