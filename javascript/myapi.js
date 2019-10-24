@@ -58,7 +58,7 @@ $(".button").on("click", function () {
           gifDiv.append(animalImage);
 
           // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
-          $("#gifs-appear-here").prepend(gifDiv);
+          $("#images").prepend(gifDiv);
         }
       }
 })
