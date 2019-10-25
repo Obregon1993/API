@@ -3,21 +3,23 @@
 
 var animals=["dog","cat","rabbit","hamster","goldfish","skunk","bird","turtle","crab","chicken","pig"];
 
+
+
 function createButtons() {
-    
-    for (let index = 0; index <animals.length; index++) {
+  $("#buttons").empty();
+        for (let index = 0; index <animals.length; index++) {
         let button = $("<button>"+animals[index]+"</button>");
-        button.attr("id", animals[index]);
-        button.attr("class", "button");
+        button.attr("data-name", animals[index]);
+        button.addClass("button");
         $("#buttons").append(" ");
         $("#buttons").append(button);
     }
     
 }
-createButtons();
 
-$(".button").on("click", function () {
-    var animalButton=$(this).attr("id");0
+
+ function displayGif () {
+    var animalButton=$(this).attr("data-name");
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         animalButton + "&api_key=KMQSbfo1B09YmfDrVddE8Ul5OJvMoHzD&limit=10";
@@ -31,7 +33,7 @@ $(".button").on("click", function () {
     .then(function(response) {
       
       var results = response.data;
-      console.log(response);
+      console.log();
 
       for (var i = 0; i < results.length; i++) {
 
@@ -63,4 +65,20 @@ $(".button").on("click", function () {
       }
 })
 
+}
+
+$("#add-gif").on("click",function (event) {
+  event.preventDefault();
+
+  let gif = $("#gif-input").val().trim();
+
+  animals.push(gif);
+
+  createButtons();
 })
+$(document).on("click", ".button", displayGif);
+
+createButtons();
+
+      // Calling the renderButtons function to display the intial buttons
+      
