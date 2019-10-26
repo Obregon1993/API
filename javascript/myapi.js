@@ -17,6 +17,19 @@ function createButtons() {
     
 }
 
+function animate() {
+  console.log("works");
+  var state = $(this).attr("data-state");
+  
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  } else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
+}
+
 
  function displayGif () {
     var animalButton=$(this).attr("data-name");
@@ -33,7 +46,7 @@ function createButtons() {
     .then(function(response) {
       
       var results = response.data;
-      console.log();
+      console.log(response.data[0].images);
 
       for (var i = 0; i < results.length; i++) {
 
@@ -53,8 +66,11 @@ function createButtons() {
 
           // Giving the image tag an src attribute of a proprty pulled off the
           // result item
-          animalImage.attr("src", results[i].images.fixed_height.url);
-
+          animalImage.attr("data-still", results[i].images.fixed_height_still.url);
+          animalImage.attr("data-animate", results[i].images.fixed_height.url);
+          animalImage.attr("src", results[i].images.fixed_height_still.url);
+          animalImage.attr("data-state", "still");
+          animalImage.addClass("gif");
           // Appending the paragraph and personImage we created to the "gifDiv" div we created
           gifDiv.append(p);
           gifDiv.append(animalImage);
@@ -77,8 +93,10 @@ $("#add-gif").on("click",function (event) {
   createButtons();
 })
 $(document).on("click", ".button", displayGif);
+$(document).on("click", ".gif", animate)
+ 
 
 createButtons();
 
-      // Calling the renderButtons function to display the intial buttons
+      
       
